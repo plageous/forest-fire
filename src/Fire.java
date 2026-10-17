@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.ArrayList;
+
 public class Fire {
     /**
      * Returns how long it takes for all vulnerable trees to be set on fire if a
@@ -41,5 +44,15 @@ public class Fire {
 
         // Implement this AND add more tests!!!
         return -1;
+    }
+
+    public static int recursiveBurn(char[][] forest, int row, int col, boolean[][] burned) {
+        if (burned[row][col] == true) return 0;
+        
+    }
+
+    public static List<Integer> burnable(char[][] forest, int r, int c) {
+        List<Integer> burnables = new ArrayList<>();
+        int row = r, col = c;
     }
 }
