@@ -1,6 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
-
+import java.util.Queue;
+import java.util.ArrayDeque;
 public class Fire {
     /**
      * Returns how long it takes for all vulnerable trees to be set on fire if a
@@ -39,21 +40,9 @@ public class Fire {
      * @return the time at which the final tree to be incinerated starts burning
      */
     public static int timeToBurn(char[][] forest, int matchR, int matchC) {
-        return recursiveBurn(forest, matchR, matchC, new boolean[forest.length][forest[0].length], 0);
+        boolean[][] burnedTrees = new boolean[forest.length][forest[0].length];
+        Queue<int[]> queue = new ArrayDeque<>();
     }
-
-    public static int recursiveBurn(char[][] forest, int row, int col, boolean[][] burned, int distance) {
-        int time = distance;
-        burned[row][col] = true;
-        for (int[] tree : burnable(forest, row, col, burned)) {
-            int newTime = recursiveBurn(forest, tree[0], tree[1], burned, distance + 1);
-            if (time <= newTime) {
-                time = newTime;
-            }
-        }
-        return time;
-    }
-
 
     /**
      * An explorer helper method to find burnable trees.
