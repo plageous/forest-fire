@@ -47,7 +47,12 @@ public class Fire {
     }
 
     public static int recursiveBurn(char[][] forest, int row, int col, boolean[][] burned) {
-        
+        int totalBurned = 1;
+        for (int[] tree : burnable(forest, row, col, burned)) {
+            burned[tree[0]][tree[1]] = true;
+            totalBurned += recursiveBurn(forest, tree[0], tree[1], burned);
+        }
+        return totalBurned;
     }
 
 
