@@ -42,6 +42,22 @@ public class Fire {
     public static int timeToBurn(char[][] forest, int matchR, int matchC) {
         boolean[][] burnedTrees = new boolean[forest.length][forest[0].length];
         Queue<int[]> queue = new ArrayDeque<>();
+        int time = 0;
+
+        queue.add(new int[]{matchR, matchC});
+
+        while(!queue.isEmpty()) {
+            int[] tree = queue.remove();
+            if (burnedTrees[tree[0]][tree[1]] == true) continue;
+            burnedTrees[tree[0]][tree[1]] = true;
+
+            List<int[]> neighbors = burnable(forest, tree[0], tree[1]);
+            for (int[] neighbor : neighbors) {
+                queue.add(neighbor);
+            }
+        }
+
+        return time;
     }
 
     /**
