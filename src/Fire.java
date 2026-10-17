@@ -39,20 +39,19 @@ public class Fire {
      * @return the time at which the final tree to be incinerated starts burning
      */
     public static int timeToBurn(char[][] forest, int matchR, int matchC) {
-        // HINT: when adding to your BFS queue, you can include more information than
-        // just a location. What other information might be useful?
-
-        // Implement this AND add more tests!!!
-        return -1;
+        return recursiveBurn(forest, matchR, matchC, new boolean[forest.length][forest[0].length]);
     }
 
     public static int recursiveBurn(char[][] forest, int row, int col, boolean[][] burned) {
-        int totalBurned = 1;
+        int time = 0;
+        burned[row][col] = true;
         for (int[] tree : burnable(forest, row, col, burned)) {
-            burned[tree[0]][tree[1]] = true;
-            totalBurned += recursiveBurn(forest, tree[0], tree[1], burned);
+            int newTime = recursiveBurn(forest, tree[0], tree[1], burned);
+            if (time <= newTime) {
+                time = newTime;
+            }
         }
-        return totalBurned;
+        return time + 1;
     }
 
 
