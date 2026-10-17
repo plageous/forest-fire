@@ -34,7 +34,6 @@ public class FireTest {
 
         int row = 1;
         int col = 1;
-        boolean[][] burned = new boolean[forest.length][forest[0].length];
 
         List<int[]> expected = new ArrayList<>();
         expected.add(new int[]{2,1});
@@ -42,7 +41,7 @@ public class FireTest {
         expected.add(new int[]{1,2});
         expected.add(new int[]{1,0});
 
-        List<int[]> actual = Fire.burnable(forest, row, col, burned);
+        List<int[]> actual = Fire.burnable(forest, row, col);
 
         assertTrue(compareListIntArr(expected, actual));
     }
@@ -56,30 +55,9 @@ public class FireTest {
         };
         int row = 1;
         int col = 1;
-        boolean[][] burned = new boolean[wasteland.length][wasteland[0].length];
 
-        List<int[]> actual = Fire.burnable(wasteland, row, col, burned);
+        List<int[]> actual = Fire.burnable(wasteland, row, col);
 
-        assertTrue(actual.size() == 0);
-    }
-
-    @Test
-    public void burnableBurnedForest() {
-        char[][] forest = {
-            {'t','t','t'},
-            {'t','t','t'},
-            {'t','t','t'}
-        };
-
-        int row = 1;
-        int col = 1;
-        boolean[][] burned = {
-            {true, true, true},
-            {true, true, true},
-            {true, true, true}
-        };
-
-        List<int[]> actual = Fire.burnable(forest, row, col, burned);
         assertTrue(actual.size() == 0);
     }
 

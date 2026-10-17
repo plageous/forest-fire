@@ -39,19 +39,19 @@ public class Fire {
      * @return the time at which the final tree to be incinerated starts burning
      */
     public static int timeToBurn(char[][] forest, int matchR, int matchC) {
-        return recursiveBurn(forest, matchR, matchC, new boolean[forest.length][forest[0].length]);
+        return recursiveBurn(forest, matchR, matchC, new boolean[forest.length][forest[0].length], 0);
     }
 
-    public static int recursiveBurn(char[][] forest, int row, int col, boolean[][] burned) {
-        int time = 0;
+    public static int recursiveBurn(char[][] forest, int row, int col, boolean[][] burned, int distance) {
+        int time = distance;
         burned[row][col] = true;
         for (int[] tree : burnable(forest, row, col, burned)) {
-            int newTime = recursiveBurn(forest, tree[0], tree[1], burned);
+            int newTime = recursiveBurn(forest, tree[0], tree[1], burned, distance + 1);
             if (time <= newTime) {
                 time = newTime;
             }
         }
-        return time + 1;
+        return time;
     }
 
 
@@ -64,28 +64,28 @@ public class Fire {
      * @param burned a 2d boolean array, where true spaces are burned, and false spaces are untouched
      * @return a List of integer arrays contaning coordinate pairs of burnable forest
      */
-    public static List<int[]> burnable(char[][] forest, int r, int c, boolean[][] burned) {
+    public static List<int[]> burnable(char[][] forest, int r, int c) {
         List<int[]> burnables = new ArrayList<>();
         int row = r, col = c;
 
         row = r + 1;
-        if (row < forest.length && forest[row][col] == 't' && burned[row][col] == false) {
+        if (row < forest.length && forest[row][col] == 't') {
             burnables.add(new int[]{row, col});
         }
 
         row = r - 1;
-        if (row >= 0 && forest[row][col] == 't' && burned[row][col] == false) {
+        if (row >= 0 && forest[row][col] == 't') {
             burnables.add(new int[]{row, col});
         }
 
         row = r;
         col = c + 1;
-        if (col < forest[row].length && forest[row][col] == 't' && burned[row][col] == false) {
+        if (col < forest[row].length && forest[row][col] == 't') {
             burnables.add(new int[]{row, col});
         }
 
         col = c - 1;
-        if (col >= 0 && forest[row][col] == 't' && burned[row][col] == false) {
+        if (col >= 0 && forest[row][col] == 't') {
             burnables.add(new int[]{row, col});
         }
 
