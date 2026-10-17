@@ -39,6 +39,22 @@ public class FireTest {
     }
 
     @Test
+    public void testIsolatedTree() {
+        char[][] forest = {
+            {'.','.','.'},
+            {'.','t','.'},
+            {'.','.','.'}
+        };
+        int row = 1;
+        int col = 1;
+
+        int expected = 0;
+        int actual = Fire.timeToBurn(forest, row, col);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void burnableTestAllBurnable() {
         char[][] forest = {
             {'t','t','t'},
