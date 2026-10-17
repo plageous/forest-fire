@@ -47,12 +47,34 @@ public class Fire {
     }
 
     public static int recursiveBurn(char[][] forest, int row, int col, boolean[][] burned) {
-        if (burned[row][col] == true) return 0;
         
     }
 
-    public static List<Integer> burnable(char[][] forest, int r, int c) {
-        List<Integer> burnables = new ArrayList<>();
+    public static List<int[]> burnable(char[][] forest, int r, int c, boolean[][] burned) {
+        List<int[]> burnables = new ArrayList<>();
         int row = r, col = c;
+
+        row = r + 1;
+        if (row < forest.length && forest[row][col] == 't' && burned[row][col] == false) {
+            burnables.add(new int[]{row, col});
+        }
+
+        row = r - 1;
+        if (row >= 0 && forest[row][col] == 't' && burned[row][col] == false) {
+            burnables.add(new int[]{row, col});
+        }
+
+        row = r;
+        col = c + 1;
+        if (col < forest[row].length && forest[row][col] == 't' && burned[row][col] == false) {
+            burnables.add(new int[]{row, col});
+        }
+
+        col = c - 1;
+        if (col >= 0 && forest[row][col] == 't' && burned[row][col] == false) {
+            burnables.add(new int[]{row, col});
+        }
+
+        return burnables;
     }
 }
