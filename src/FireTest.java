@@ -1,7 +1,10 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.util.CollectionUtils;
 
+import java.util.List;
+import java.util.ArrayList;
 public class FireTest {
     @Test
     public void testTimeToBurnExample() {
@@ -21,5 +24,28 @@ public class FireTest {
         assertEquals(expected, actual);
     }
 
-    // Add more tests!
+    @Test
+    public void burnableTestAllBurnable() {
+        char[][] forest = {
+            {'t','t','t'},
+            {'t','t','t'},
+            {'t','t','t'}
+        };
+
+        int row = 1;
+        int col = 1;
+        boolean[][] burned = new boolean[forest.length][forest[0].length];
+
+        List<int[]> expected = new ArrayList<>();
+        expected.add(new int[]{2,1});
+        expected.add(new int[]{0,1});
+        expected.add(new int[]{1,2});
+        expected.add(new int[]{1,0});
+
+        List<int[]> actual = Fire.burnable(forest, row, col, burned);
+        for (int[] pair : actual) {
+            System.out.println(pair[0] + "," + pair[1]);
+        }
+        assertTrue(CollectionUtils.isEqualCollection(expected, actual));
+    }
 }
