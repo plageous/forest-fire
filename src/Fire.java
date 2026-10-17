@@ -42,18 +42,25 @@ public class Fire {
     public static int timeToBurn(char[][] forest, int matchR, int matchC) {
         boolean[][] burnedTrees = new boolean[forest.length][forest[0].length];
         Queue<int[]> queue = new ArrayDeque<>();
-        int time = 0;
+        int time = -1;
 
         queue.add(new int[]{matchR, matchC});
+        burnedTrees[matchR][matchC] = true;
 
         while(!queue.isEmpty()) {
-            int[] tree = queue.remove();
-            if (burnedTrees[tree[0]][tree[1]] == true) continue;
-            burnedTrees[tree[0]][tree[1]] = true;
+            time++;
+            int breadth = queue.size();
 
-            List<int[]> neighbors = burnable(forest, tree[0], tree[1]);
-            for (int[] neighbor : neighbors) {
-                queue.add(neighbor);
+            for (int i = 0; i < breadth; i++) {
+                int[] tree = queue.remove();
+
+                List<int[]> neighbors = burnable(forest, tree[0], tree[1]);
+                for (int[] neighbor : neighbors) {
+                    if (burnedTrees[neighbor[0]][neighbor[1]] == false) {
+                        queue.add(neighbor);
+                        burnedTrees[neighbor[0]][neighbor[1]] = true;
+                    }
+                }
             }
         }
 
@@ -66,7 +73,7 @@ public class Fire {
      * @param forest a 2d array, represented by t's (trees) and .'s (the ground)
      * @param r the row of the current flame
      * @param c the column of the current flame
-     * @return a List of integer arrays containing coordinate pairs of burnable forest
+     * @return a List of integer arrays containing coordinate pairs of possible spreading
      */
     public static List<int[]> burnable(char[][] forest, int r, int c) {
         List<int[]> burnables = new ArrayList<>();

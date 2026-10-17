@@ -25,6 +25,20 @@ public class FireTest {
     }
 
     @Test
+    public void testTimeToBurnFuse() {
+        char[][] fuse = {
+            {'t','t','t','t','t','t','t','t','t','t','t','t','t','t','t','t'} // time: 15
+        };
+        int row = 0;
+        int col = 0;
+
+        int expected = 15;
+        int actual = Fire.timeToBurn(fuse, row, col);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void burnableTestAllBurnable() {
         char[][] forest = {
             {'t','t','t'},
