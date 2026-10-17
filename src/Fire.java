@@ -50,6 +50,16 @@ public class Fire {
         
     }
 
+
+    /**
+     * An explorer helper method to find burnable trees.
+     * 
+     * @param forest a 2d array, represented by t's (trees) and .'s (the ground)
+     * @param r the row of the current flame
+     * @param c the column of the current flame
+     * @param burned a 2d boolean array, where true spaces are burned, and false spaces are untouched
+     * @return a List of integer arrays contaning coordinate pairs of burnable forest
+     */
     public static List<int[]> burnable(char[][] forest, int r, int c, boolean[][] burned) {
         List<int[]> burnables = new ArrayList<>();
         int row = r, col = c;
