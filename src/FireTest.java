@@ -47,6 +47,42 @@ public class FireTest {
         assertTrue(compareListIntArr(expected, actual));
     }
 
+    @Test
+    public void burnableAllGround() {
+        char[][] wasteland = {
+            {'.','.','.'},
+            {'.','.','.'},
+            {'.','.','.'}
+        };
+        int row = 1;
+        int col = 1;
+        boolean[][] burned = new boolean[wasteland.length][wasteland[0].length];
+
+        List<int[]> actual = Fire.burnable(wasteland, row, col, burned);
+
+        assertTrue(actual.size() == 0);
+    }
+
+    @Test
+    public void burnableBurnedForest() {
+        char[][] forest = {
+            {'t','t','t'},
+            {'t','t','t'},
+            {'t','t','t'}
+        };
+
+        int row = 1;
+        int col = 1;
+        boolean[][] burned = {
+            {true, true, true},
+            {true, true, true},
+            {true, true, true}
+        };
+
+        List<int[]> actual = Fire.burnable(forest, row, col, burned);
+        assertTrue(actual.size() == 0);
+    }
+
     private static boolean compareListIntArr(List<int[]> list1, List<int[]> list2) {
         String output1 = "";
         String output2 = "";
