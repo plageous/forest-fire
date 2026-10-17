@@ -84,14 +84,9 @@ public class FireTest {
     }
 
     private static boolean compareListIntArr(List<int[]> list1, List<int[]> list2) {
-        String output1 = "";
-        String output2 = "";
-        for (int[] pair : list1) {
-            output1 += "{" + pair[0] + "," + pair[1] + "}";
-        }
-        for (int[] pair : list2) {
-            output2 += "{" + pair[0] + "," + pair[1] + "}";
-        }
+        String output1 = "", output2 = "";
+        for (int[] pair : list1) output1 += "{" + pair[0] + "," + pair[1] + "}";
+        for (int[] pair : list2) output2 += "{" + pair[0] + "," + pair[1] + "}";
         return output1.equals(output2);
     }
 }
